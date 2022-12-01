@@ -10,9 +10,10 @@ Here you can find information regarding:
 * Interfacing with other software & devices. - [Server Overview](server/overview.md)
 
 
-## Finding information
+## 
 
-Please use the tabs on the left or feel free to use the search bar at the top left of the page to search within this documentation.
+!!! tip "Finding information"
+    Use the tabs on the left or use the search bar at the top left of the page to search within this documentation.
 
 <!-- ## Getting started
 

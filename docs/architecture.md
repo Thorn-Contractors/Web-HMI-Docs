@@ -12,7 +12,8 @@ The server manages the reading and writing of data to the different sources that
 
 It complies this information in to JSON and serves it to the client via a socket server which enables live updates between server, client, and PLC.
 
-The main source of information to be displayed and edited is the PLC, the base functionality of this connection has been implemented and included as part of the HMI under the library "ADS Core". To find out more about this library please head to [ADS Core](server/ads_core.md)
+!!! info
+    The base functionality of the PLC connection has been implemented and included as part of the HMI under the library "ADS Core". To find out more about this library please head to [ADS Core](server/ads_core.md)
 
 ## The Client
 
