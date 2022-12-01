@@ -1,0 +1,24 @@
+site_name: Web HMI
+theme:
+  name: material
+
+nav:
+    - 'Welcome': 'index.md'
+    - 'How it works': 'architecture.md'
+    - 'Getting Started': 'getting_started.md'
+    - 'Client':
+        - 'Overview': 'client/overview.md'
+        - 'Components': 
+            - 'Input Boxes': 'client/components/input_box.md'
+    - 'Server':
+        - 'Overview': 'server/overview.md'
+        - 'ADS Core': 'server/ads_core.md'
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
