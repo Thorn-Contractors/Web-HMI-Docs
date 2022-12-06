@@ -6,7 +6,7 @@ The built in input box component uses the provided onscreen keyboard to accept u
 It can be included with Jinja using the following path:
 
 ```html
-"components/general/input_box.html"
+"general/input_box.html"
 ```
 
 With the following parameters:
@@ -34,7 +34,7 @@ To edit javascript strings within the Vue.js app object, use the input type ```"
             variable_name='example_string',
             input_type="text"
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
@@ -62,7 +62,7 @@ To edit javascript numerical values within the Vue.js app object, use the input 
             variable_name='example_numeric',
             input_type="numeric"
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
@@ -89,7 +89,7 @@ If the value that you are editing needs to stay within bounds just add the ```bo
             input_type="numeric",
             bounds=[0,20]
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
@@ -115,7 +115,7 @@ To handle PLC strings, use the input type ```"PLC_text"``` and provide the symbo
             plc_symbol='GVL_HMI.G_HMI.Q.sExampleString',
             input_type="PLC_text"
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
@@ -131,7 +131,7 @@ When handling numeric values, use input type ```"PLC_numeric"``` and the library
             plc_symbol='GVL_HMI.G_HMI.Q.nExampleInt',
             input_type="PLC_numeric"
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
@@ -149,7 +149,7 @@ If the value that you are editing needs to stay within bounds just add the ```bo
             input_type="PLC_numeric",
             bounds=[0,20]
         %]
-            [% include "components/general/input_box.html" %]
+            [% include "general/input_box.html" %]
         [% endwith %]
         ```
 
