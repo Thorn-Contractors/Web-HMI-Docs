@@ -1,41 +1,39 @@
-# Input Boxes
+```
+# HmiInputBox Component
 
-The built in input box component uses the provided onscreen keyboard to accept user entry for a verity of different use cases.
+The built-in HmiInputBox Vue component provides a customizable input box that supports different use cases including string and numeric inputs.
 
-
-It can be included with Jinja using the following path:
+You can use this component in your Vue template as follows:
 
 ```html
-"general/input_box.html"
+<hmi-input-box/>
 ```
 
-With the following parameters:
+Below are the prop details:
 
-| Parameter          | Description                    | Required  | Default        |
-| :---:              | :---:                          | :---:     |                |
-| ```plc_symbol```   | The PLC symbol address         | ✅        | N/A            |
-| ```variable_name```| The Vue.js variable name       | ✅        | N/A            |
-| ```input_type```   | The type of variable to change | ✅        | N/A            |
-| ```bounds```       | The PLC symbol address         | ❌        | ```Null```     |
-
+| Prop              | Description                    | Required  | Default        |
+| :---:             | :---:                          | :---:     |                |
+| ```inputType```   | The type of input to accept    | ✅        | ```"text"```   |
+| ```variable```    | The Vue.js variable name       | ❌        | ```""```       |
+| ```plcSymbol```   | The PLC symbol address         | ❌        | ```""```       |
+| ```bounds```      | Bounds for numeric input       | ❌        | ```undefined```|
+| ```decimalPlaces```| Number of decimal places for the numeric input | ❌ | ```undefined``` |
 
 ## Supported input types
 
 ### Vue Strings
 
-To edit javascript strings within the Vue.js app object, use the input type ```"text"``` and provide the variable that you want to access.
+To edit JavaScript strings within the Vue.js app object, use the prop `inputType` with value `"text"` and provide the variable that you want to access.
 
 
 !!! example "Vue Strings Example"
     === "HTML"
 
         ``` html
-        [% with
-            variable_name='example_string',
-            input_type="text"
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
+        <hmi-input-box
+            input-type="text"
+            variable="exampleString"
+        />
         ```
 
     === "Js"
@@ -48,49 +46,19 @@ To edit javascript strings within the Vue.js app object, use the input type ```"
         }
         ```
 
-
 ### Vue Numeric
 
-To edit javascript numerical values within the Vue.js app object, use the input type ```"numeric"``` and provide the variable that you want to access.
+To edit JavaScript numerical values within the Vue.js app object, use the prop `inputType` with value `"numeric"` and provide the variable that you want to access.
 
 
 !!! example "Vue Numeric Example"
     === "HTML"
 
         ``` html
-        [% with
-            variable_name='example_numeric',
-            input_type="numeric"
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
-        ```
-
-    === "Js "
-
-        ```js 
-        var hmi_data = {
-            data: {
-                example_numeric: 12.3
-            }
-        }
-        ```
-
-If the value that you are editing needs to stay within bounds just add the ```bounds``` attribute with the values that you require.
-
-!!! example
-    For example, if ```example_numeric``` cannot be lower than ```0``` or higher than ```20``` the code would be:
-
-    === "HTML" "Vue Numeric Example With Bounds"
-
-        ```HTML
-        [% with
-            variable_name='example_numeric',
-            input_type="numeric",
-            bounds=[0,20]
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
+        <hmi-input-box
+            input-type="numeric"
+            variable="exampleNumeric"
+        />
         ```
 
     === "Js"
@@ -98,7 +66,31 @@ If the value that you are editing needs to stay within bounds just add the ```bo
         ```js
         var hmi_data = {
             data: {
-                example_numeric: 11
+                exampleNumeric: 12.3
+            }
+        }
+        ```
+
+If the value that you are editing needs to stay within bounds, add the `bounds` prop with the values that you require.
+
+
+!!! example "Vue Numeric Bounds Example"
+    === "HTML"
+
+        ``` html
+        <hmi-input-box
+            input-type="numeric"
+            variable="exampleNumeric"
+            :bounds="[0, 20]"
+        />
+        ```
+
+    === "Js"
+
+        ```js
+        var hmi_data = {
+            data: {
+                exampleNumeric: 11
             }
         }
         ```
@@ -106,59 +98,43 @@ If the value that you are editing needs to stay within bounds just add the ```bo
 
 ### PLC Strings
 
-To handle PLC strings, use the input type ```"PLC_text"``` and provide the symbol that you want to access.
+To handle PLC strings, use the prop `inputType` with value `"PLC_text"` and provide the symbol that you want to access.
+
 
 !!! example "PLC Strings Example"
     === "HTML"
-        ```html
-        [% with
-            plc_symbol='GVL_HMI.G_HMI.Q.sExampleString',
-            input_type="PLC_text"
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
-        ```
 
+        ``` html
+        <hmi-input-box
+            input-type="PLC_text"
+            plcSymbol="GVL_HMI.G_HMI.Q.sExampleString"
+        />
+        ```
 
 ### PLC Numeric
 
-When handling numeric values, use input type ```"PLC_numeric"``` and the library will automatically determine the type of numeric and edit accordingly. This supports all PLC numeric types, such as: ```REAL```, ```UINT```, ```INT```, etc
+To handle numeric values from a PLC, use the prop `inputType` with value `"PLC_numeric"`. This supports all PLC numeric types, such as: `REAL`, `UINT`, `INT`, etc.
 
 !!! example "PLC Numeric Example"
     === "HTML"
-        ```html
-        [% with
-            plc_symbol='GVL_HMI.G_HMI.Q.nExampleInt',
-            input_type="PLC_numeric"
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
+
+        ``` html
+        <hmi-input-box
+            input-type="PLC_numeric"
+            plcSymbol="GVL_HMI.G_HMI.Q.nExampleInt"
+        />
         ```
 
+If the value that you are editing needs to stay within bounds, add the `bounds` prop with the values that you require.
 
-If the value that you are editing needs to stay within bounds just add the ```bounds``` attribute with the values that you require.
 
-
-!!! example "Plc Numeric Example With Bounds"
-    For example, if ```nExampleInt``` cannot be lower than ```0``` or higher than ```20``` the code would be:
-
+!!! example "PLC Numeric Bounds Example"
     === "HTML"
-        ```HTML 
-        [% with
-            plc_symbol='GVL_HMI.G_HMI.Q.nExampleInt',
-            input_type="PLC_numeric",
-            bounds=[0,20]
-        %]
-            [% include "general/input_box.html" %]
-        [% endwith %]
+
+        ``` html
+        <hmi-input-box
+            input-type="PLC_numeric"
+            plcSymbol="GVL_HMI.G_HMI.Q.nExampleInt"
+            :bounds="[0, 20]"
+        />
         ```
-
-
-
-
-
-
-
-
-
-
